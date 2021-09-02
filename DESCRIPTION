@@ -1,0 +1,25 @@
+Package: randplot
+Title: Use RAND Style with ggplot
+Version: 1.0.0.0000
+Authors@R: c(
+    person(given = "Alyson",
+           family = "Youngblood",
+           role = c("aut", "cre"),
+           email = "ayoungbl@rand.org"),
+    person(given = "Pedro",
+           family = "Nascimento de Lima",
+           role = "ctb",
+           email = "plima@rand.org"))
+Description: randplot is an R package that contains a ggplot2 theme and color palettes for making graphics in the style that the RAND Communications Design team uses.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    ggplot2,
+    graphics
+Collate: 
+    'rand-pal.R'
+    'randplot.R'
+    'theme-rand.R'

@@ -4,13 +4,18 @@
 \alias{theme_rand}
 \title{Apply the RAND theme}
 \usage{
-theme_rand()
+theme_rand(font = "Helvetica")
+}
+\arguments{
+\item{font}{"Helvetica" by default. Helvetica is used for graphics on rand.org. Pass "Helvetica Neue" for graphics that will be printed in a RAND report.}
 }
 \description{
 This is the RAND ggplot2 theme. It controls the display of ggplot2 charts.
 }
 \details{
 Use \code{theme_rand()} like other ggplot2 themes by adding \code{theme_rand()} to your plot.
+
+\code{theme_rand()} uses Helvetica as its default font, which is used for graphics on rand.org. Graphics in printed RAND reports use Helvetica Neue, so use \code{theme_rand("Helvetica Neue")} if your graphics will go into a printed report.
 }
 \examples{
 \dontrun{

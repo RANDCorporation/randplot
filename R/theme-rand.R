@@ -5,6 +5,10 @@
 #' @details
 #' Use `theme_rand()` like other ggplot2 themes by adding `theme_rand()` to your plot.
 #'
+#' `theme_rand()` uses Helvetica as its default font, which is used for graphics on rand.org. Graphics in printed RAND reports use Helvetica Neue, so use `theme_rand("Helvetica Neue")` if your graphics will go into a printed report.
+#'
+#' @param font "Helvetica" by default. Helvetica is used for graphics on rand.org. Pass "Helvetica Neue" for graphics that will be printed in a RAND report.
+#'
 #' @export
 #'
 #' @examples
@@ -34,11 +38,10 @@
 #'   ylab("GDP per capita") +
 #'   theme_rand()
 #' }
-theme_rand <- function() {
+theme_rand <- function(font = "Helvetica") {
   dark_gray <- RandGrayPal[9]
   gray <- RandGrayPal[6]
   light_gray <- RandGrayPal[2]
-  font <- "Helvetica"
 
   ggplot2::theme(
     # Plot

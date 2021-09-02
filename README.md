@@ -118,10 +118,10 @@ Themes don't control every visual aspect of graphics in ggplot2, so you'll likel
 - The `position` parameter in `scale_y_continuous()`: Set `scale_y_continuous(position = "right")` in a plot to place y-axis labels on the right, which helps emphasize the most recent values in time series line charts.
 
 ### Fonts
-## Graphics on RAND.org
+#### Graphics on RAND.org
 Helvetica is the font used in graphics on rand.org, so Helvetica is the default font used in randplot.
 
-## Graphics in printed RAND reports
+#### Graphics in printed RAND reports
 Helvetica Neue is the font used in printed RAND reports. To use Helvetica Neue with randplot, pass it as a string to `theme_rand()`, like this: `theme_rand("Helvetica Neue")`.
 
 Many computers do not have Helvetica or Helvetica Neue installed. If your computer is one of them, then static ggplot2 graphics and Shiny ggplot2 graphics that use randplot and are served locally will fall back to using Arial. Arial is metrically compatible with Helvetica, and looks fairly similar. ggplot2 graphics that use randplot and are served via shinyapps.io will use Helvetica, regardless of whether it is installed on your computer or users' computers.

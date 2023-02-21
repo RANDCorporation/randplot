@@ -1,5 +1,9 @@
 # randplot
 
+ <!-- badges: start -->
+  [![check-full](https://github.com/RANDCorporation/randplot/actions/workflows/check-full.yaml/badge.svg)](https://github.com/RANDCorporation/randplot/actions/workflows/check-full.yaml)
+  <!-- badges: end -->
+
 randplot is an R package that contains a [ggplot2](https://ggplot2.tidyverse.org) theme and color palettes for making graphics in the style that the RAND Communications Design team uses.
 
 

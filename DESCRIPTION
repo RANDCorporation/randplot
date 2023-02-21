@@ -15,7 +15,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Imports: 
     ggplot2,
     graphics
@@ -23,3 +23,6 @@ Collate:
     'rand-pal.R'
     'randplot.R'
     'theme-rand.R'
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

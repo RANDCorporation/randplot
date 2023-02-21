@@ -74,7 +74,7 @@ theme_rand <- function(font = "Helvetica") {
     plot.caption.position = "plot",
 
     # Axes
-    axis.line = ggplot2::element_line(color = light_gray, size = 0.5),
+    axis.line = ggplot2::element_line(color = light_gray, linewidth = 0.5),
     axis.line.y = ggplot2::element_blank(),
     axis.text = ggplot2::element_text(size = 12,
                              color = dark_gray),

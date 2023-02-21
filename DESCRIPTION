@@ -23,3 +23,6 @@ Collate:
     'rand-pal.R'
     'randplot.R'
     'theme-rand.R'
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

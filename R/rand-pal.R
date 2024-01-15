@@ -14,15 +14,15 @@
 #' \describe{
 #'   \item{RandCatPal}{
 #'     \itemize{
-#'       \item #61c6c6
-#'       \item #ce8644
-#'       \item #c1536b
-#'       \item #595a5a
-#'       \item #e2c755
-#'       \item #597cbe
-#'       \item #45aF84
-#'       \item #7995a5
-#'       \item #af61a7
+#'       \item #8a02fd
+#'       \item #191351
+#'       \item #951195
+#'       \item #fdbbbd
+#'       \item #7982dd
+#'       \item #eb98ff
+#'       \item #ecf100
+#'       \item #b1f4fd
+#'       \item #ccff89
 #'     }
 #'   }
 #'   \item{RandGrayPal}{
@@ -85,15 +85,15 @@ NULL
 #' @rdname rand_pal
 #' @export
 RandCatPal <- c(
-  "#61c6c6",
-  "#ce8644",
-  "#c1536b",
-  "#595a5a",
-  "#e2c755",
-  "#597cbe",
-  "#45aF84",
-  "#7995a5",
-  "#af61a7"
+  "#8a02fd",
+  "#191351",
+  "#951195",
+  "#fdbbbd",
+  "#7982dd",
+  "#eb98ff",
+  "#ecf100",
+  "#b1f4fd",
+  "#ccff89"
 )
 
 #' @rdname rand_pal

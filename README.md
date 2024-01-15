@@ -48,15 +48,15 @@ This package also contains a categorical palette and a palette of sequential sha
 ##### `RandCatPal`
 `RandCatPal` includes various colors that are suitable for showing discrete, qualitative values:
 
-- `#61c6c6`
-- `#ce8644`
-- `#c1536b`
-- `#595a5a`
-- `#e2c755`
-- `#597cbe`
-- `#45aF84`
-- `#7995a5`
-- `#af61a7`
+- `#8a02fd`
+- `#191351`
+- `#951195`
+- `#fdbbbd`
+- `#7982dd`
+- `#eb98ff`
+- `#ecf100`
+- `#b1f4fd`
+- `#ccff89`
 
 ##### `RandGrayPal`
 `RandGrayPal` includes all of the grays that are used in RAND charts, plus additional grays for completeness:
@@ -81,7 +81,7 @@ scale_color_manual(values = RandGrayPal)
 Access specific colors from randplot's palettes like this:
 
 ```r
-RandCatPal[1] # Returns the first color in RandCatPal, #61c6c6
+RandCatPal[1] # Returns the first color in RandCatPal, #8a02fd
 RandGrayPal[1:3] # Returns the first through third colors of RandGrayPal.
 ```
 

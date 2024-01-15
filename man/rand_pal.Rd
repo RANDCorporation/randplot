@@ -38,15 +38,15 @@ Use \code{RandCatPal} or \code{RandGrayPal} in a plot by passing one of them to 
 \describe{
 \item{RandCatPal}{
 \itemize{
-\item #61c6c6
-\item #ce8644
-\item #c1536b
-\item #595a5a
-\item #e2c755
-\item #597cbe
-\item #45aF84
-\item #7995a5
-\item #af61a7
+\item #8a02fd
+\item #191351
+\item #951195
+\item #fdbbbd
+\item #7982dd
+\item #eb98ff
+\item #ecf100
+\item #b1f4fd
+\item #ccff89
 }
 }
 \item{RandGrayPal}{

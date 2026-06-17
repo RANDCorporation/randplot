@@ -1,0 +1,157 @@
+---
+title: "RAND Plot Styles"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{RAND Plot Styles}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 4,
+  dpi = 120
+)
+library(ggplot2)
+library(randplot)
+
+# "ABC Monument Grotesk" requires a licensed install. Fall back to Inter (via
+# Google Fonts) so the vignette renders cleanly on any machine.
+if ("ABC Monument Grotesk" %in% systemfonts::system_fonts()$family) {
+  rand_font <- "ABC Monument Grotesk"
+} else {
+  showtext::font_add_google("Inter", "Inter")
+  showtext::showtext_auto()
+  rand_font <- "Inter"
+}
+```
+
+## Color Palettes
+
+randplot ships three categories of palette, matching RAND's brand guidelines. Use `show_rand_pal()` to preview any palette by name.
+
+### Categorical
+
+Use `RandCatPal` to distinguish discrete, unordered groups. Do not mix colors from multiple palettes in a single chart.
+
+```{r cat-preview}
+show_rand_pal("RandCatPal")
+```
+
+```{r cat-example}
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point(size = 2, alpha = 0.8) +
+  scale_color_manual(values = RandCatPal) +
+  labs(
+    title = "Iris sepal dimensions by species",
+    x = "Sepal length (cm)",
+    y = "Sepal width (cm)"
+  ) +
+  theme_rand(font = rand_font)
+```
+
+### Sequential
+
+Sequential palettes are for ordered data (low to high). Lighter colors represent lower values; darker colors represent higher values. Pass the palette to `scale_color_gradientn()` or `scale_fill_gradientn()` for continuous data, or use selected stops with `scale_*_manual()` for discrete ordered groups.
+
+```{r seq-previews}
+show_rand_pal("RandSeqBluePal")
+show_rand_pal("RandSeqYellowBluePal")
+show_rand_pal("RandSeqYellowPurplePal")
+show_rand_pal("RandSeqPinkPurplePal")
+```
+
+```{r seq-example}
+ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
+  geom_point(size = 3) +
+  scale_color_gradientn(colors = RandSeqBluePal) +
+  labs(
+    title = "Fuel efficiency by weight and horsepower",
+    x = "Weight (1,000 lbs)",
+    y = "Miles per gallon",
+    color = "Horsepower"
+  ) +
+  theme_rand(font = rand_font)
+```
+
+For a discrete ordered variable, index into the palette to pick evenly-spaced stops:
+
+```{r seq-discrete-example}
+mtcars$cyl_f <- factor(mtcars$cyl)
+
+ggplot(mtcars, aes(x = wt, y = mpg, color = cyl_f)) +
+  geom_point(size = 3) +
+  scale_color_manual(values = RandSeqBluePal[c(3, 6, 9)]) +
+  labs(
+    title = "Fuel efficiency by weight and cylinder count",
+    x = "Weight (1,000 lbs)",
+    y = "Miles per gallon",
+    color = "Cylinders"
+  ) +
+  theme_rand(font = rand_font)
+```
+
+### Diverging
+
+Diverging palettes are for data centered on a meaningful midpoint (zero, an average, a baseline). The two ends are distinct hues; the center is neutral.
+
+```{r div-previews}
+show_rand_pal("RandDivTealOrangePal")
+show_rand_pal("RandDivBlueOrangePal")
+show_rand_pal("RandDivSteelSalmonPal")
+show_rand_pal("RandDivInkSalmonPal")
+```
+
+```{r div-example}
+set.seed(42)
+regions <- c(
+  "Northeast", "Midwest", "South", "West",
+  "Mountain", "Pacific", "Great Plains", "Southwest"
+)
+div_data <- data.frame(
+  region = factor(regions, levels = regions[order(rnorm(8))]),
+  change = c(3.2, -1.8, 5.4, -4.1, 2.0, -0.5, 1.3, -3.7)
+)
+
+ggplot(div_data, aes(x = change, y = region, fill = change)) +
+  geom_col() +
+  geom_vline(xintercept = 0, color = "#333333", linewidth = 0.4) +
+  scale_fill_gradientn(
+    colors = RandDivTealOrangePal,
+    limits = c(-6, 6),
+    guide = "none"
+  ) +
+  labs(
+    title = "Change from national average (%)",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_rand(font = rand_font)
+```
+
+---
+
+## Theme
+
+`theme_rand(font = rand_font)` applies RAND's visual style to any ggplot. The default font is `"ABC Monument Grotesk"`. Pass a different font name if that typeface is unavailable in your environment.
+
+```{r theme-example}
+monthly <- data.frame(
+  month = factor(month.abb, levels = month.abb),
+  value = c(12, 15, 22, 28, 35, 41, 44, 43, 36, 27, 18, 13)
+)
+
+ggplot(monthly, aes(x = month, y = value)) +
+  geom_col(fill = RandCatPal[1]) +
+  labs(
+    title = "Monthly values",
+    subtitle = "A demonstration of theme_rand(font = rand_font)",
+    caption = "Source: Example data",
+    x = NULL,
+    y = "Value"
+  ) +
+  theme_rand(font = rand_font)
+```

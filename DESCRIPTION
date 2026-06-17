@@ -23,7 +23,11 @@ Collate:
     'rand-pal.R'
     'randplot.R'
     'theme-rand.R'
-Suggests: 
+Suggests:
     covr,
+    knitr,
+    rmarkdown,
+    showtext,
     testthat (>= 3.0.0)
+VignetteBuilder: knitr
 Config/testthat/edition: 3

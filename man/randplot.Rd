@@ -19,6 +19,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Pedro Nascimento de Lima \email{plima@rand.org} [contributor]
+  \item Joshua Eagan \email{jeagan@rand.org} [contributor]
 }
 
 }

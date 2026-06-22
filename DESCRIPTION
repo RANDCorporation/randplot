@@ -1,6 +1,6 @@
 Package: randplot
 Title: Use RAND Style with ggplot
-Version: 1.0.0.0000
+Version: 2.0.0.0000
 Authors@R: c(
     person(given = "Alyson",
            family = "Youngblood",
@@ -37,7 +37,8 @@ Suggests:
     rmarkdown,
     showtext,
     sysfonts,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    withr
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 Config/roxygen2/version: 8.0.0

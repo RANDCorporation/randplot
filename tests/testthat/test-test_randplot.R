@@ -95,6 +95,37 @@ test_that("rand_font returns a non-empty string", {
   expect_true(nchar(rand_font()) > 0)
 })
 
+# .rand_load_fonts fallback behaviour -----------------------------------------
+
+test_that(".rand_load_fonts falls back to Inter when no config file exists", {
+  original_font <- .randplot_env$font
+  on.exit(.randplot_env$font <- original_font, add = TRUE)
+
+  withr::with_envvar(
+    c(R_USER_DATA_DIR = withr::local_tempdir()),
+    {
+      # Redirect config so .font_config_path() points to a nonexistent file
+      withr::local_envvar(R_USER_CONFIG_DIR = withr::local_tempdir())
+      .randplot_env$font <- "sans"
+      .rand_load_fonts()
+      expect_equal(rand_font(), "Inter")
+    }
+  )
+})
+
+test_that(".rand_load_fonts falls back to sans when sysfonts is unavailable", {
+  original_font <- .randplot_env$font
+  on.exit(.randplot_env$font <- original_font, add = TRUE)
+
+  .randplot_env$font <- "sans"
+  local_mocked_bindings(
+    requireNamespace = function(pkg, ...) FALSE,
+    .package = "base"
+  )
+  .rand_load_fonts()
+  expect_equal(rand_font(), "sans")
+})
+
 # rand_font_setup -------------------------------------------------------------
 
 test_that("rand_font_setup saves path and activates Monument Grotesk", {

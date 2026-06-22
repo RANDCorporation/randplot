@@ -15,6 +15,7 @@ Authors@R: c(
            role = "ctb",
            email = "jeagan@rand.org"))
 Description: randplot is an R package that contains a ggplot2 theme and color palettes for making graphics in the style that the RAND Communications Design team uses.
+Depends: R (>= 4.0.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

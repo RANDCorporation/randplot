@@ -58,6 +58,50 @@ test_that("show_rand_pal errors on invalid palette name", {
 
 # theme_rand font default -----------------------------------------------------
 
-test_that("theme_rand defaults to ABC Monument Grotesk", {
-  expect_equal(theme_rand()$text$family, "ABC Monument Grotesk")
+test_that("theme_rand uses the active rand_font()", {
+  expect_equal(theme_rand()$text$family, rand_font())
+})
+
+# rand_pal_n ------------------------------------------------------------------
+
+test_that("rand_pal_n returns the requested number of colors", {
+  expect_length(rand_pal_n(RandSeqBluePal, 5), 5)
+  expect_length(rand_pal_n(RandSeqBluePal, 20), 20)
+  expect_length(rand_pal_n(RandCatPal, 1), 1)
+})
+
+test_that("rand_pal_n returns valid hex color strings", {
+  result <- rand_pal_n(RandSeqBluePal, 5)
+  expect_type(result, "character")
+  expect_true(all(grepl("^#[0-9A-Fa-f]{6}$", result)))
+})
+
+test_that("rand_pal_n works on all palette types", {
+  expect_no_error(rand_pal_n(RandCatPal, 5))
+  expect_no_error(rand_pal_n(RandDivTealOrangePal, 5))
+  expect_no_error(rand_pal_n(RandSeqYellowPurplePal, 5))
+})
+
+test_that("rand_pal_n with n equal to palette length returns similar colors", {
+  result <- rand_pal_n(RandSeqBluePal, 9)
+  expect_length(result, 9)
+  expect_type(result, "character")
+})
+
+# rand_font -------------------------------------------------------------------
+
+test_that("rand_font returns a non-empty string", {
+  expect_type(rand_font(), "character")
+  expect_true(nchar(rand_font()) > 0)
+})
+
+# rand_font_setup -------------------------------------------------------------
+
+test_that("rand_font_setup saves path and activates Monument Grotesk", {
+  skip_if_not(
+    file.exists(path.expand("~/Downloads/DINAMO Order 2023-1505603.zip")),
+    "DINAMO zip not present"
+  )
+  rand_font_setup(path.expand("~/Downloads/DINAMO Order 2023-1505603.zip"))
+  expect_equal(rand_font(), "ABCMonumentGrotesk")
 })

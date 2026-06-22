@@ -221,6 +221,66 @@ RandGrayPal <- c(
   "#333333"
 )
 
+# OKLCH interpolation ---------------------------------------------------------
+
+# Convert hex vector → matrix of (L, C, H) in OKLCH via farver's OKLab.
+# farver gives OKLab in Cartesian form; C and H are the polar equivalents.
+hex_to_oklch <- function(hex) {
+  rgb <- farver::decode_colour(hex, to = "rgb")
+  lab <- farver::convert_colour(rgb, from = "rgb", to = "oklab")
+  C   <- sqrt(lab[, 2]^2 + lab[, 3]^2)
+  H   <- (atan2(lab[, 3], lab[, 2]) * (180 / pi)) %% 360
+  cbind(L = lab[, 1], C = C, H = H)
+}
+
+# Convert matrix of (L, C, H) → hex via farver's OKLab.
+oklch_to_hex <- function(lch) {
+  H_rad <- lch[, "H"] * (pi / 180)
+  lab   <- cbind(lch[, "L"], lch[, "C"] * cos(H_rad), lch[, "C"] * sin(H_rad))
+  rgb        <- farver::convert_colour(lab, from = "oklab", to = "rgb")
+  rgb[]      <- pmax(0, pmin(255, rgb))
+  farver::encode_colour(rgb)
+}
+
+#' Interpolate a RAND palette to any number of colors in OKLCH
+#'
+#' Generates `n` colors by interpolating between the stops of a RAND palette
+#' in the OKLCH color space, matching the perceptually uniform gradients used
+#' in RAND's brand guidelines. Hue is interpolated along the shortest arc.
+#'
+#' @param palette A character vector of hex color stops (any RAND palette).
+#' @param n Integer. Number of colors to return.
+#' @return A character vector of `n` hex colors.
+#'
+#' @examples
+#' \dontrun{
+#' # 5-step discrete sequential palette
+#' rand_pal_n(RandSeqBluePal, 5)
+#'
+#' # Smooth continuous gradient for ggplot2
+#' ggplot(mtcars, aes(wt, mpg, color = hp)) +
+#'   geom_point() +
+#'   scale_color_gradientn(colors = rand_pal_n(RandSeqBluePal, 256))
+#' }
+#' @export
+rand_pal_n <- function(palette, n) {
+  lch     <- hex_to_oklch(palette)
+  old_pos <- seq(0, 1, length.out = nrow(lch))
+  new_pos <- seq(0, 1, length.out = n)
+
+  L_new <- stats::approx(old_pos, lch[, "L"], xout = new_pos)$y
+  C_new <- stats::approx(old_pos, lch[, "C"], xout = new_pos)$y
+
+  # Unwrap hue to shortest-arc path before linear interpolation
+  H <- lch[, "H"]
+  for (i in seq_along(H)[-1]) {
+    H[i] <- H[i - 1] + ((H[i] - H[i - 1] + 180) %% 360) - 180
+  }
+  H_new <- stats::approx(old_pos, H, xout = new_pos)$y
+
+  oklch_to_hex(cbind(L = L_new, C = C_new, H = H_new))
+}
+
 # show_rand_pal ---------------------------------------------------------------
 
 #' @rdname rand_pal

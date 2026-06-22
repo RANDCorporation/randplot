@@ -9,17 +9,25 @@ Authors@R: c(
     person(given = "Pedro",
            family = "Nascimento de Lima",
            role = "ctb",
-           email = "plima@rand.org"))
+           email = "plima@rand.org"),
+    person(given = "Joshua",
+           family = "Eagan",
+           role = "ctb",
+           email = "jeagan@rand.org"))
 Description: randplot is an R package that contains a ggplot2 theme and color palettes for making graphics in the style that the RAND Communications Design team uses.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
-Imports: 
+Imports:
+    farver,
     ggplot2,
-    graphics
-Collate: 
+    graphics,
+    stats,
+    tools,
+    utils
+Collate:
+    'font-setup.R'
     'rand-pal.R'
     'randplot.R'
     'theme-rand.R'
@@ -28,6 +36,8 @@ Suggests:
     knitr,
     rmarkdown,
     showtext,
+    sysfonts,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

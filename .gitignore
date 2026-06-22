@@ -4,3 +4,5 @@
 .Ruserdata
 .DS_Store
 doc*
+vignettes/*.html
+tests/testthat/Rplots.pdf

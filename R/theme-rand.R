@@ -5,11 +5,13 @@
 #' @details
 #' Use `theme_rand()` like other ggplot2 themes by adding `theme_rand()` to your plot.
 #'
-#' `theme_rand()` uses "ABC Monument Grotesk" as its default font. Pass a different
-#' font name if that typeface is not available in your environment.
+#' The default font is resolved at call time by [rand_font()]. After running
+#' [rand_font_setup()] once, `theme_rand()` will automatically use ABC Monument
+#' Grotesk in every subsequent session. Without setup, it falls back to the
+#' system sans-serif font.
 #'
-#' @param font `"ABC Monument Grotesk"` by default. Pass any font family name
-#'   available on your system.
+#' @param font Font family name. Defaults to [rand_font()], which returns
+#'   `"ABCMonumentGrotesk"` if configured, or `"sans"` otherwise.
 #'
 #' @export
 #'
@@ -40,7 +42,7 @@
 #'   ylab("GDP per capita") +
 #'   theme_rand()
 #' }
-theme_rand <- function(font = "ABC Monument Grotesk") {
+theme_rand <- function(font = rand_font()) {
   dark_gray <- RandGrayPal[9]
   gray <- RandGrayPal[6]
   light_gray <- RandGrayPal[2]
@@ -100,7 +102,8 @@ theme_rand <- function(font = "ABC Monument Grotesk") {
     legend.position = "top",
     legend.title = ggplot2::element_blank(),
     legend.text = ggplot2::element_text(size = 10,
-                                        margin = ggplot2::margin(r = 8)),
+                                        margin = ggplot2::margin(t = 4, r = 8)),
+    legend.ticks = ggplot2::element_blank(),
 
     # Strip
     strip.background = ggplot2::element_blank(),

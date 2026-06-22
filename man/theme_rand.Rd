@@ -4,10 +4,11 @@
 \alias{theme_rand}
 \title{Apply the RAND theme}
 \usage{
-theme_rand(font = "Helvetica")
+theme_rand(font = rand_font())
 }
 \arguments{
-\item{font}{"Helvetica" by default. Helvetica is used for graphics on rand.org. Pass "Helvetica Neue" for graphics that will be printed in a RAND report.}
+\item{font}{Font family name. Defaults to \code{\link[=rand_font]{rand_font()}}, which returns
+\code{"ABCMonumentGrotesk"} if configured, or \code{"sans"} otherwise.}
 }
 \description{
 This is the RAND ggplot2 theme. It controls the display of ggplot2 charts.
@@ -15,7 +16,10 @@ This is the RAND ggplot2 theme. It controls the display of ggplot2 charts.
 \details{
 Use \code{theme_rand()} like other ggplot2 themes by adding \code{theme_rand()} to your plot.
 
-\code{theme_rand()} uses Helvetica as its default font, which is used for graphics on rand.org. Graphics in printed RAND reports use Helvetica Neue, so use \code{theme_rand("Helvetica Neue")} if your graphics will go into a printed report.
+The default font is resolved at call time by \code{\link[=rand_font]{rand_font()}}. After running
+\code{\link[=rand_font_setup]{rand_font_setup()}} once, \code{theme_rand()} will automatically use ABC Monument
+Grotesk in every subsequent session. Without setup, it falls back to the
+system sans-serif font.
 }
 \examples{
 \dontrun{

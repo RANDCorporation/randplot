@@ -2,8 +2,23 @@
 % Please edit documentation in R/randplot.R
 \docType{package}
 \name{randplot}
+\alias{randplot-package}
 \alias{randplot}
 \title{randplot}
 \description{
 The randplot package provides a ggplot2 theme and functions to make graphics in RAND style.
+}
+\author{
+\strong{Maintainer}: Alyson Youngblood \email{ayoungbl@rand.org}
+
+Authors:
+\itemize{
+  \item Alyson Youngblood \email{ayoungbl@rand.org}
+}
+
+Other contributors:
+\itemize{
+  \item Pedro Nascimento de Lima \email{plima@rand.org} [contributor]
+}
+
 }

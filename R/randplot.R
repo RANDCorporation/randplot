@@ -5,3 +5,7 @@
 #' @docType package
 #' @name randplot
 NULL
+
+.onLoad <- function(libname, pkgname) {
+  .rand_load_fonts()
+}
